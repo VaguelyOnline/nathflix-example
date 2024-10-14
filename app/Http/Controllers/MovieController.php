@@ -39,6 +39,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
+        $movie->load('genres');
         return Inertia::render('Movies/MovieShow', compact('movie'));
     }
 
