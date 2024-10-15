@@ -10,6 +10,7 @@ use Inertia\Inertia;
 Route::get('/genres/', [GenreController::class, 'index'])
     ->name('genres.index');
 
+// genre = Route parameters, not a query parameter / query string
 Route::get('/genres/{genre}', [GenreController::class, 'show'])
     ->name('genres.show');
 

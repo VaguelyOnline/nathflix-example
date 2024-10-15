@@ -12,10 +12,11 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $paginator = Movie::paginate();
-        return Inertia::render('Movies/Index', compact('paginator'));   
+        $searchInput = $request->input('search');
+        $paginator = Movie::where('name', 'like', "%$searchInput%")->paginate();
+        return Inertia::render('Movies/Index', compact('paginator', 'searchInput'));
     }
 
     /**
@@ -37,7 +38,7 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie)
+    public function show(Movie $movie, Request $request)
     {
         $movie->load('genres');
         return Inertia::render('Movies/MovieShow', compact('movie'));
