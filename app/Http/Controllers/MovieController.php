@@ -17,7 +17,7 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $searchInput = $request->input('search');
-        $paginator = Movie::where('name', 'like', "%$searchInput%")->paginate(50);
+        $paginator = Movie::where('name', 'like', "%$searchInput%")->paginate(50);     
 
         $featuredMovie = Movie::inRandomOrder()->first();
 
@@ -74,7 +74,8 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+        return to_route('movies.index');
     }
 
     public function trailer(Movie $movie)

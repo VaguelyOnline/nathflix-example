@@ -9,6 +9,15 @@ defineProps({
     }
 });
 
+function confirmDelete() {
+    // show the modal for the confirming the delete
+    doDelete();
+}
+
+function doDelete() {
+    alert('Deleting!');
+}
+
 </script>
 
 <template>
@@ -21,6 +30,14 @@ defineProps({
                 :href="route('genres.show', genre)"  class="badge badge-accent ml-2 text-gray-200">
                 {{ genre.name }}
             </Link>
+
+            <details class="dropdown">
+                <summary class="btn m-1">Manage</summary>
+                <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                    <li><a>Edit</a></li>
+                    <li><a @click="confirmDelete">Delete</a></li>
+                </ul>
+            </details>
             
             <Link class="btn btn-secondary btn-sm float-right" :href="route('movies.index')">
                 View all movies

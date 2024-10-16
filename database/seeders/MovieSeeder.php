@@ -61,9 +61,9 @@ class MovieSeeder extends Seeder
 
         foreach([
             1980,
-            // 1990,
-            // 2000,
-            // 2010,
+            1990,
+            2000,
+            2010,
         ] as $year)
             $movieData = $movieData->merge($this->getYearData($this->getListUrl($year)), $movieData);
 
@@ -119,13 +119,12 @@ class MovieSeeder extends Seeder
             ->chunk(2000);
 
         foreach($insertDataChunks as $chunk)
-            foreach($chunk as $movieInfo)
-                Movie::create($movieInfo);
+            Movie::create($chunk->toArray());
 
         $this->addTimeInfo('Seeded movies');
 
         return Movie::all();
-    }
+    }    
 
     private function seedGenres(Collection $movieData)
     {
