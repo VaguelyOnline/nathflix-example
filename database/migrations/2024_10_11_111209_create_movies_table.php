@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
+            $table->string('description');
             $table->integer('seconds');
             $table->string('poster_url');
-            $table->string('trailer_url');
+            $table->string('trailer_url')->nullable();
         });
     }
 

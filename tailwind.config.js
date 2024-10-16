@@ -20,10 +20,12 @@ export default {
 
     plugins: [
         forms,
+        require("@tailwindcss/typography"),
+        require("@tailwindcss/aspect-ratio"),
         require('daisyui')
     ],
 
     daisyui: {
-        themes: ["light", "dark", "cupcake", "retro"],
+        themes: ["light", "dark", "cupcake", "retro", "wireframe", "corporate", "winter"],
     },
 };
