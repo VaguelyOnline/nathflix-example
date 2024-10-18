@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Genre;
 use App\Models\Movie;
+use Exception;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -11,7 +12,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use PHPUnit\Runner\DeprecationCollector\Collector;
+use Throwable;
 
 class MovieSeeder extends Seeder
 {
@@ -119,8 +122,8 @@ class MovieSeeder extends Seeder
             ->chunk(2000);
 
         foreach($insertDataChunks as $chunk)
-            Movie::create($chunk->toArray());
-
+            Movie::insert($chunk->toArray());
+            
         $this->addTimeInfo('Seeded movies');
 
         return Movie::all();

@@ -50,7 +50,7 @@ class MovieController extends Controller
     public function show(Movie $movie, Request $request)
     {
         $movie->load('genres');
-        return Inertia::render('Movies/MovieShow', compact('movie'));
+        return Inertia::render('Movies/Show', compact('movie'));
     }
 
     /**
@@ -58,7 +58,7 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+        return Inertia::render('Movies/Edit', compact('movie'));
     }
 
     /**
@@ -66,7 +66,8 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        $movie->update($request->all());
+        return to_route('movies.edit', $movie);
     }
 
     /**

@@ -10,6 +10,12 @@ class Movie extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'poster_url',
+    ];
+
     public function genres() 
     {
         return $this->belongsToMany(Genre::class);
