@@ -41,7 +41,7 @@ function doSearch() {
 }
 
 function generateRandomMovie() {
-    const randomId = Math.floor(Math.random() * 9000) + 1; // Generates a number between 1 and 9000
+    const randomId = Math.floor(Math.random() * 9000) + 1;
     window.location.href = `/movies/${randomId}`; // Redirect to the random movie
 }
 
