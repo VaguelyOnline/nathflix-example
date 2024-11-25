@@ -10,7 +10,6 @@ import Paginator from '@/Widgets/Paginator.vue';
 const emit = defineEmits({
 //
 })
-
 const props = defineProps({
     paginator: {
         required: true,
