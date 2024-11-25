@@ -3,6 +3,7 @@
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Movie;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,12 @@ use Inertia\Inertia;
 
 // See: https://laravel.com/docs/11.x/controllers#resource-controllers
 Route::resource('genres', GenreController::class);
+
+// Generate a random movie from the database and redirect user
+Route::get('/movies/random', function () {
+    $random = Movie::all()->random();
+    return to_route('movies.show', $random);
+})->name('movies.random');
 
 Route::resource('movies', MovieController::class)->except([
     'edit',
@@ -56,7 +63,7 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // To share screen:
 // https://app.calibrae.com/alacrity

@@ -16,6 +16,10 @@ class MovieController extends Controller
      */
     public function index(Request $request)
     {
+        if (rand(0, 1))
+            abort(500);
+
+
         $searchInput = $request->input('search');
         $paginator = Movie::where('name', 'like', "%$searchInput%")->paginate(50);     
 
@@ -50,6 +54,8 @@ class MovieController extends Controller
     public function show(Movie $movie, Request $request)
     {
         $movie->load('genres');
+
+        $movie->load('ratings');
         return Inertia::render('Movies/Show', compact('movie'));
     }
 
@@ -82,7 +88,8 @@ class MovieController extends Controller
     public function trailer(Movie $movie)
     {
         $urls = $this->scrapeYouTube($movie->name . ' movie trailer');
-        return redirect($urls[0]);
+        return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+        // return redirect($urls[0]);
     }
 
     private function getYoutubeUrls($html)
