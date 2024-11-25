@@ -17,14 +17,8 @@ class MovieController extends Controller
      */
     public function index(Request $request)
     {
-<<<<<<< HEAD
         $genres = Genre::all()->pluck('name');
-=======
-        if (rand(0, 1))
-            abort(500);
-
->>>>>>> bc5c7a81195496f89024238fd796787c0ae414ac
-
+     
         $searchInput = $request->input('search');
 
         $paginator = Movie::where('name', 'like', "%$searchInput%")->paginate(50);     
@@ -35,7 +29,7 @@ class MovieController extends Controller
             'featuredMovie', 
             'paginator', 
             'searchInput',
-            'genres'   // Pass genres to the Inertia page
+            'genres' 
         ));
     }
 
