@@ -11,27 +11,30 @@ const { movie } = defineProps({
 });
 
 const loading = ref(true);
+const isFavorite = ref(false);
+
 function iframeLoaded() {
     loading.value = false;
 }
 
-const confirmation = ref(null);
-function confirmDelete() {
-    // show the modal for the confirming the delete
-    confirmation.value.show();
+function toggleFavorite() {
+    isFavorite.value = !isFavorite.value;
 }
 
+const confirmation = ref(null);
+function confirmDelete() {
+    confirmation.value.show();
+}
 
 function doDelete() {
     router.delete(route('movies.destroy', movie))
 }
 
-
 </script>
 
 <template>
 
-    <Confirmation ref="confirmation" title="Please confirm" text="Are you sure you wish to delele this movie?">
+    <Confirmation ref="confirmation" title="Please confirm" text="Are you sure you wish to delete this movie?">
         <template #buttons>
             <button class="btn mr-4">Cancel</button>
             <button @click="doDelete" class="btn btn-warning">Delete</button>
@@ -51,6 +54,9 @@ function doDelete() {
             </span>
             
             <span>
+                <button @click="toggleFavorite" class="btn" :class="isFavorite ? 'btn-success' : 'btn-outline'">
+                    {{ isFavorite ? 'Unfavorite' : 'Favorite' }}
+                </button>
                 <details v-if="$page.props.auth.user" class="dropdown mr-4">
                     <summary class="btn btn-neutral m-1">Manage</summary>
                     <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
