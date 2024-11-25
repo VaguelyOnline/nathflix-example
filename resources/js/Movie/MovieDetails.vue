@@ -10,6 +10,11 @@ const { movie } = defineProps({
 
 const movieUrl = route('movies.show', movie.id);
 
+const shareMovie = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(movieUrl)}&quote=${encodeURIComponent(movie.name)}`;
+    window.open(url, 'Share on Facebook', 'width=600,height=400,menubar=no,toolbar=no,location=yes,scrollbars=yes,resizable=yes,status=no');
+};
+
 </script>
 
 <template>
@@ -28,9 +33,10 @@ const movieUrl = route('movies.show', movie.id);
                 </div>
             </p>
             <div class="card-actions">
-                <button class="btn w-full btn-outline-secondary">Watch</button>
+                <button class="btn w-full btn-outline-secondary" @click.stop="shareMovie">Share on Facebook</button>
             </div>
         </div>
     </div>
 
 </template>
+
