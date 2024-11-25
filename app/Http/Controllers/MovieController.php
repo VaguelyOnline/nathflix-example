@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use Symfony\Component\DomCrawler\Crawler;
 use App\Models\Movie;
 use Illuminate\Http\Request;
@@ -16,11 +17,10 @@ class MovieController extends Controller
      */
     public function index(Request $request)
     {
-        if (rand(0, 1))
-            abort(500);
-
-
+        $genres = Genre::all()->pluck('name');
+     
         $searchInput = $request->input('search');
+
         $paginator = Movie::where('name', 'like', "%$searchInput%")->paginate(50);     
 
         $featuredMovie = Movie::inRandomOrder()->first();
@@ -28,7 +28,8 @@ class MovieController extends Controller
         return Inertia::render('Movies/Index', compact(
             'featuredMovie', 
             'paginator', 
-            'searchInput'
+            'searchInput',
+            'genres' 
         ));
     }
 
