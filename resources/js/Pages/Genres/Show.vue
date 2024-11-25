@@ -20,7 +20,7 @@ defineProps({
             <span class="badge badge-info text-white">
                 {{ genre.movies_count }} movies
             </span>
-        </h3>
+        </h3> 
         <p>
             {{ genre.description }}
         </p>

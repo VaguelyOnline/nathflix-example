@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ProfileController;
@@ -30,14 +30,8 @@ Route::get('/', function (Request $request) {
     return to_route('movies.index');
 });
 
-
-
-
-
-
-
-
-
+//Cars route 
+Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -56,7 +50,7 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // To share screen:
 // https://app.calibrae.com/alacrity
