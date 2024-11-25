@@ -41,8 +41,7 @@ function doSearch() {
 }
 
 function generateRandomMovie() {
-    const randomId = Math.floor(Math.random() * 9000) + 1;
-    window.location.href = `/movies/${randomId}`; // Redirect to the random movie
+    router.visit(route("movies.random")); // Redirect to the random movie
 }
 
 const searchDebouncer = debounce(doSearch, 800);
@@ -63,7 +62,10 @@ watch(search, searchDebouncer);
             />
 
             <button class="btn btn-secondary">Search</button>
-            <button class="btn btn-success" @click="generateRandomMovie">
+            <button
+                class="btn btn-success"
+                @click.prevent="generateRandomMovie"
+            >
                 Generate Random Movie
             </button>
         </form>
